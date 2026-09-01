@@ -39,6 +39,17 @@ BLUESKY_APP_PASSWORD = _obrigatoria("BLUESKY_APP_PASSWORD")
 MASTODON_INSTANCE_URL = _obrigatoria("MASTODON_INSTANCE_URL")
 MASTODON_ACCESS_TOKEN = _obrigatoria("MASTODON_ACCESS_TOKEN")
 
+# Lista de instâncias consultadas na coleta
+# formato no .env: URLs separadas por vírgula.
+# Se MASTODON_INSTANCES não for definida, cai de volta para usar só a
+# instância principal (MASTODON_INSTANCE_URL)
+
+_INSTANCIAS_RAW = os.getenv("MASTODON_INSTANCES", "")
+MASTODON_INSTANCES = [
+    instancia.strip() for instancia in _INSTANCIAS_RAW.split(",") if instancia.strip()
+] or [MASTODON_INSTANCE_URL]
+
+
 # Banco de dados
 # DB_PATH no .env é relativo à raiz do projeto (turing-bot/), não à pasta bot/.
 _DB_PATH_RAW = os.getenv("DB_PATH", "../bd/database.db")

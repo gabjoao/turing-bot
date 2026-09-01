@@ -64,10 +64,12 @@ def testar_conexao_crua() -> None:
 
 def testar_coletor_completo() -> None:
     # Testa o MastodonCollector real
-    print("\n=== Teste 2: coletor completo (MastodonCollector) ===\n")
+    print(
+        f"\n=== Teste 2: coletor completo (MastodonCollector, instâncias: {config.MASTODON_INSTANCES}) ===\n"
+    )
 
     collector = MastodonCollector()
-    posts = collector.coletar(limite=10)
+    posts = collector.coletar(limite_por_instancia=10)
 
     print(
         f"Posts coletados e traduzidos com sucesso (após filtro de idioma): {len(posts)}\n"
