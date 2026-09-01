@@ -117,6 +117,9 @@ class BlueskyCollector:
                 texto_bruto = raw_texto
                 publicado_em = datetime.fromisoformat(raw_criado_em)
                 seguidores = self._buscar_seguidores(post_view.author.did)
+                compartilhamentos = (post_view.repost_count or 0) + (
+                    post_view.quote_count or 0
+                )
 
                 post = Post(
                     post_id_origem=post_view.uri,
@@ -124,7 +127,7 @@ class BlueskyCollector:
                     texto_bruto=texto_bruto,
                     texto_anonimizado=_anonimizar_mencoes(texto_bruto),
                     curtidas=post_view.like_count or 0,
-                    compartilhamentos=post_view.repost_count or 0,
+                    compartilhamentos=compartilhamentos,
                     respostas=post_view.reply_count or 0,
                     seguidores_autor=seguidores,
                     publicado_em=publicado_em,
