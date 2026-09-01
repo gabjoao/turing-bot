@@ -71,6 +71,9 @@ class MastodonCollector:
                 if getattr(status, "language", None) != config.IDIOMA_ALVO:
                     continue
 
+                if getattr(status.account, "bot", False):
+                    continue
+
                 texto_bruto = _limpar_html(status.content)
 
                 # compartilhamentos inclui reblogs + citações (quotes_count)
