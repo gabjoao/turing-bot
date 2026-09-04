@@ -10,13 +10,9 @@ from atproto import Client
 from collectors.bluesky_collector import BlueskyCollector
 
 
-def testar_conexao_crua() -> None:
+def testar_conexao_crua(client: Client) -> None:
     # Faz login e uma busca simples imprimindo o objeto bruto retornado
     print("=== Teste 1: conexão crua com a API ===\n")
-
-    client = Client()
-    client.login(config.BLUESKY_HANDLE, config.BLUESKY_APP_PASSWORD)
-    print("Login OK.\n")
 
     resposta = client.app.bsky.feed.search_posts(
         {"q": "hoje", "sort": "top", "lang": "pt", "limit": 3}
@@ -47,12 +43,9 @@ def testar_conexao_crua() -> None:
     print("author.did:", getattr(primeiro.author, "did", "<<NÃO ENCONTRADO>>"))
 
 
-def testar_perfil() -> None:
+def testar_perfil(client: Client) -> None:
     # Testa de busca para o número de seguidores de um autor
     print("\n=== Teste 2: busca de perfil (seguidores) ===\n")
-
-    client = Client()
-    client.login(config.BLUESKY_HANDLE, config.BLUESKY_APP_PASSWORD)
 
     # Usa o próprio handle do bot como teste, já que sabemos que ele existe
     perfil = client.app.bsky.actor.get_profile({"actor": config.BLUESKY_HANDLE})
@@ -88,6 +81,10 @@ def testar_coletor_completo() -> None:
 
 
 if __name__ == "__main__":
-    testar_conexao_crua()
-    testar_perfil()
+    client = Client()
+    client.login(config.BLUESKY_HANDLE, config.BLUESKY_APP_PASSWORD)
+    print("Login OK).\n")
+
+    testar_conexao_crua(client)
+    testar_perfil(client)
     testar_coletor_completo()
