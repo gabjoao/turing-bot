@@ -43,6 +43,23 @@ TERMOS_SEED = [
     "eu",
     "de",
     "da",
+    "o",
+    "a",
+    "um",
+    "uma",
+    "se",
+    "meu",
+    "minha",
+    "seu",
+    "sua",
+    "teu",
+    "tua",
+    "cara",
+    "de",
+    "em",
+    "é",
+    "mas",
+    "pq",
 ]
 
 # REGEX que reconhece menções,
@@ -51,7 +68,7 @@ PADRAO_MENCAO = re.compile(r"@[\w.\-]+")
 
 
 def _anonimizar_mencoes(texto: str) -> str:
-    return PADRAO_MENCAO.sub("Usuário", texto)
+    return PADRAO_MENCAO.sub("@Usuário", texto)
 
 
 def _tem_label_sensivel(post_view) -> bool:
