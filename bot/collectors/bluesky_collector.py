@@ -25,6 +25,7 @@ from models.post import Post
 # Termos genéricos para iniciar a busca
 TERMOS_SEED = [
     "que",
+    "q",
     "para",
     "não",
     "hoje",
@@ -43,6 +44,7 @@ TERMOS_SEED = [
     "eu",
     "de",
     "da",
+    "do",
     "o",
     "a",
     "um",
@@ -60,6 +62,16 @@ TERMOS_SEED = [
     "é",
     "mas",
     "pq",
+    "pqp",
+    "meio",
+    "como",
+    "quem",
+    "mano",
+    "ta",
+    "ne",
+    "tudo",
+    "todos",
+    "todo",
 ]
 
 # REGEX que reconhece menções,
